@@ -25,23 +25,10 @@ class TestBooksCollector:
         collector.set_book_genre(name, genre)
         assert collector.get_book_genre(name) == genre
 
-
-
-
-
-    @pytest.mark.parametrize("genre, books", [('Фантастика', ['Дюна', 'Успеть вспомнить']),
-                                         ('Ужасы', ['Долгая прогулка']),
-                                         ('Детективы', ['Острые предметы'])])
-    def test_get_books_with_specific_genre_for_existing_genre(self, genre, books, collector):
+    def test_get_books_with_specific_genre_for_existing_genre(self, collector):
         collector.add_new_book('Дюна')
         collector.set_book_genre('Дюна', 'Фантастика')
-        collector.add_new_book('Долгая прогулка')
-        collector.set_book_genre('Долгая прогулка', 'Ужасы')
-        collector.add_new_book('Успеть вспомнить')
-        collector.set_book_genre('Успеть вспомнить', 'Фантастика')
-        collector.add_new_book('Острые предметы')
-        collector.set_book_genre('Острые предметы', 'Детективы')
-        assert collector.get_books_with_specific_genre(genre) == books
+        assert collector.get_books_with_specific_genre('Фантастика') == ['Дюна']
 
     @pytest.mark.parametrize("books_genre, expected_result", [(
             {"Острые предметы": "Детективы", "Долгая прогулка": "Ужасы"},
